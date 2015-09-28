@@ -1,16 +1,24 @@
 <head>
-<<<<<<< HEAD
   <title>Todo List</title>
 </head>
 
 <body>
 <div class="container">
   <header>
-    <h1>Todo List</h1>
+    <h1>Todo List ({{incompleteCount}})</h1>
 
+    <label class="hide-completed">
+      <input type="checkbox" checked="{{hideCompleted}}" />
+      Hide Completed Tasks
+    </label>
+
+    {{> loginButtons}}
+
+    {{#if currentUser}}
     <form class="new-task">
-      <input type="text" name="text" placeholder="Type to add new tasks"/>
+      <input type="text" name="text" placeholder="Type to add new tasks" />
     </form>
+    {{/if}}
   </header>
 
   <ul>
@@ -22,26 +30,21 @@
 </body>
 
 <template name="task">
-  <li class="{{#if checked}}checked{{/if}}">
+  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
     <button class="delete">&times;</button>
 
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked"/>
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
 
-    <span class="text">{{text}}</span>
+    {{#if isOwner}}
+    <button class="toggle-private">
+      {{#if private}}
+      Private
+      {{else}}
+      Public
+      {{/if}}
+    </button>
+    {{/if}}
+
+    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
   </li>
 </template>
-=======
-  <title>simple-todos</title>
-</head>
-
-<body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-</body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
->>>>>>> origin/master
